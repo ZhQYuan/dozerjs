@@ -10,7 +10,7 @@ var server = require('http').createServer(app);
 var slash = require('express-slash');
 var multipart = require('connect-multiparty');
 var multiparty = multipart();
-var config = require('./lib/config');
+var config = require('./lib/config.js');
 var modules = require('./lib/modules.js');
 var middleware = config.get('middleware');
 var settings = config.get('expressConfig') || [];
@@ -47,7 +47,7 @@ app.use(app.router);
 app.use(slash());
 
 // Serve static assets
-app.use(express.static(config.get('env.publicHTTP') || __dirname + 'public/src'));
+app.use(express.static(config.get('env.publicHTTP') || __dirname + config.get('env.publicHTTP')));
 
 // Set custom Express config
 if (settings.length) {
