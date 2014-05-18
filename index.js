@@ -35,8 +35,25 @@ for (i=0, z=load.length; i<z; i++){
 
 app.use(modules.lib.cors);
 
-// Basic express config
+// Initialize custom middleware
+// These can be set in the /config.js file 'middleware' property by assigning
+// the corresponding /components/{name}.js, {name} as an array member
 
+if (middleware.length) {
+  modules.lib.stdout('title','LOADING MIDDLEWARE');
+  for (i=0, z=middleware.length; i<z; i++) {
+    if (modules.components.hasOwnProperty(middleware[i])) {
+      // All is good, apply the component
+      app.use(modules.components[middleware[i]]);
+      modules.lib.stdout('output', 'MIDDLEWARE Applied: ' + middleware[i]);
+    } else {
+      // No component available
+      modules.lib.stdout('error', 'ADAPTER Missing: ' + middleware[i]);
+    }
+  }
+}
+
+// Basic express config
 app.enable('strict routing');
 app.use(express.logger(config.get('expressLogging')));
 app.use(express.cookieParser());
@@ -58,24 +75,6 @@ if (settings.length) {
       value = settings[i][1] || null;
       app.set(settings[i][0], value);
       modules.lib.stdout('output', 'EXPRESS SETTING Applied: ' + settings[i][0] + '=' + value);
-    }
-  }
-}
-
-// Initialize custom middleware
-// These can be set in the /config.js file 'middleware' property by assigning
-// the corresponding /components/{name}.js, {name} as an array member
-
-if (middleware.length) {
-  modules.lib.stdout('title','LOADING MIDDLEWARE');
-  for (i=0, z=middleware.length; i<z; i++) {
-    if (modules.components.hasOwnProperty(middleware[i])) {
-      // All is good, apply the component
-      app.use(modules.components[middleware[i]]);
-      modules.lib.stdout('output', 'MIDDLEWARE Applied: ' + middleware[i]);
-    } else {
-      // No component available
-      modules.lib.stdout('error', 'ADAPTER Missing: ' + middleware[i]);
     }
   }
 }
