@@ -7,7 +7,7 @@
     "url": "https://github.com/DozerJS/dozerjs.git"
   },
   "dependencies": {
-    "express": "~3.4.8",
+    "express": "~4.0.0",
     "connect-multiparty": "~1.0.3",
     "express-slash": "~1.0.0",
     "socket.io": "~0.9.16",
