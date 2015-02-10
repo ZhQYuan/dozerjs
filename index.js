@@ -10,7 +10,6 @@ var config = require('./lib/config.js');
 var modules = require('./lib/modules.js');
 var middleware = config.get('middleware');
 var settings = config.get('expressConfig') || [];
-var bodyParser = require('body-parser');
 var load = [ 'lib', 'adapters', 'components', 'controllers', 'models', 'api'];
 
 var value, i, z;
@@ -49,11 +48,6 @@ if (middleware.length) {
     }
   }
 }
-
-// Basic express config
-app.use(bodyParser({
-  limit: config.get('reqLimit')
-}));
 
 // Serve static assets
 app.use(express.static(config.get('env.publicHTTP') || __dirname + config.get('env.publicHTTP')));

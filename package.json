@@ -7,7 +7,6 @@
     "url": "https://github.com/DozerJS/dozerjs.git"
   },
   "dependencies": {
-    "body-parser": "^1.11.0",
     "cli-color": "~0.2.3",
     "express": "~4.0.0",
     "nedb": "~0.10.2",
