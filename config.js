@@ -9,12 +9,6 @@ var config = {
     port: 8181
   },
 
-  // Session secret
-  secret: '6de5661ab3c401bcb266dff913',
-
-  // Request limit size
-  reqLimit: '2M',
-
   // Database store configuration
   db: {
 
